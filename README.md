@@ -178,7 +178,7 @@ Plugin interface is very simple. For more information, you can look the [example
 -   Outbound IP selection
 -   Middleware Support, you can add, your own middleware
 -   RTT priority within listed servers
--   Failover forwarders while returning failured responses
+-   Failover forwarders while returning failured responses (now works also when forwarder fails)
 -   Forwarder support
 -   EDNS Cookie Support (client&lt;->server)
 -   EDNS NSID Support
