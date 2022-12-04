@@ -15,6 +15,7 @@ import (
 // Forwarder type
 type Forwarder struct {
 	servers []string
+	cfg	*config.Config
 }
 
 func init() {
@@ -38,7 +39,7 @@ func New(cfg *config.Config) *Forwarder {
 		}
 	}
 
-	return &Forwarder{servers: forwarderservers}
+	return &Forwarder{servers: forwarderservers, cfg: cfg}
 }
 
 // Name return middleware name
@@ -68,6 +69,11 @@ func (f *Forwarder) ServeDNS(ctx context.Context, ch *middleware.Chain) {
 		resp.Id = req.Id
 
 		_ = w.WriteMsg(resp)
+		return
+	}
+
+	if len(f.cfg.FallbackServers) > 0 {
+		ch.Next(ctx)
 		return
 	}
 
